@@ -3,6 +3,7 @@
     <%= render 'profile', book: @book %>
     <div class="col-md-8 offset-1">
       <h2>Book detail</h2>
+      <%= link_to "Destroy", book_path(@book), method: :delete %>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Bookers2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scal=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,41 +12,64 @@
   </head>
 
   <body>
-    <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "Books", "/books" %>
-        </li>
-        <li>
-          <%= link_to "Home", "/users" %>
-        </li>
-        <li>
-          <%= link_to "Users", "/users" %>
-        </li>
-        <li>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Books", "/books" %>
-        </li>
-        <li>
-          <%= link_to "Home", "/users" %>
-        </li>
-        <li>
-          <%= link_to "About", "/users" %>
-        </li>
-        <li>
-          <%= link_to "Sign up", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "Log in", new_user_session_path %>
-        </li>
-      <% end %>
-    </header>
-    <%= yield %>
-    <footer>
-      <p>CopyRight Infratop.inc</p>
-    </footer>
+    <div class="container-fluid">
+      <div class="header row px-3 py-4">
+        <div class="col-2">
+          <div class="logo">Bookers</div>
+        </div>
+        <div class="col-6 offset-4">
+          <div class="row">
+            <% if user_signed_in? %>
+              <div class="col-3">
+                <%= link_to user_path(current_user.id) do %>
+                  <i class="fa-solid fa-house"></i>Home
+                <% end %>
+              </div>
+              <div class="col-3">
+                <%= link_to "/users" do %>
+                  <i class="fa-solid fa-users"></i>Users
+                <% end %>
+              </div>
+              <div class="col-3">
+                <%= link_to "/books" do %>
+                  <i class="fa-solid fa-book-open"></i>Books
+                <% end %>
+              </div>
+              <div class="col-3">
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <i class="fa-solid fa-right-from-bracket"></i>Log out
+                <% end %>
+              </div>
+            <% else %>
+              <div class="col-3">
+                <%= link_to root_path do %>
+                  <i class="fa-solid fa-house"></i>Home
+                <% end %>
+              </div>
+              <div class="col-3">
+                <%= link_to about_path do %>
+                  <i class="fa-solid fa-link"></i>About
+                <% end %>
+              </div>
+              <div class="col-3">
+                <%= link_to new_user_registration_path do %>
+                  <i class="fa-solid fa-user-plus"></i>Sign up
+                <% end %>
+              </div>
+              <div class="col-3">
+                <%= link_to new_user_session_path do %>
+                  <i class="fa-solid fa-right-to-bracket"></i>Log in
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%= yield %>
+      <footer>
+        <p>CopyRight Infratop.inc</p>
+      </footer>
+    </div>
   </body>
 </html>

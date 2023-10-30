@@ -1,9 +1,18 @@
+<div class="text-success">
+  <%= flash[:notice] %>
+</div>
+
 <div class="container px-5 px-sm-0">
   <div class="row">
     <%= render 'profile', book: @book %>
     <div class="col-md-8 offset-1">
       <h2>Book detail</h2>
-      <%= link_to "Destroy", book_path(@book), method: :delete %>
+      <%= image_tag @book.user.get_profile_image(100,100) %>
+      <%= @book.user.name %>
+      <%= @book.title %>
+      <%= @book.body %>
+      <%= link_to "Edit", edit_book_path, class: "btn btn-success" %>
+      <%= link_to "Destroy", books_path, method: :delete, class: "btn btn-danger" %>
     </div>
   </div>
 </div>

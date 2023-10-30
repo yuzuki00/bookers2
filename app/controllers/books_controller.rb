@@ -1,23 +1,32 @@
 class BooksController < ApplicationController
-  
+
   def new
     @book = Book.new
   end
 
   def create
+    @user = current_user
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
-    redirect_to book_path(@book.user_id)
+    if @book.save
+      flash[:notice] = "You have created book successfully."
+      redirect_to book_path(@book)
+    else
+      flash[:alert] = "投稿に失敗しました"
+      @books = Book.all
+      render "index"
+    end
   end
 
   def index
+    @user = User.find(current_user.id)
     @book = Book.find(current_user.id)
     @books = Book.all
     @users = User.all
   end
 
   def show
+    @user = User.find(current_user.id)
     @book = Book.find(params[:id])
   end
 
@@ -28,7 +37,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     @book.update(book_params)
-    redirect_to book_path(@book.user.id)
+    redirect_to book_path(@book.id)
   end
 
   def destroy

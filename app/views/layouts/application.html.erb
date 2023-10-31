@@ -11,61 +11,66 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <div class="container-fluid">
-      <div class="header row px-3 py-4">
-        <div class="col-2">
-          <div class="logo">Bookers</div>
-        </div>
-        <div class="col-6 offset-4">
-          <div class="row">
+
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3"><%= link_to "Bookers", root_path %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
-              <div class="col-3">
+            <li class="nav-item">
                 <%= link_to user_path(current_user.id) do %>
                   <i class="fa-solid fa-house"></i>Home
                 <% end %>
-              </div>
-              <div class="col-3">
-                <%= link_to "/users" do %>
+            </li>
+            <li class="nav-item">
+                 <%= link_to "/users" do %>
                   <i class="fa-solid fa-users"></i>Users
                 <% end %>
-              </div>
-              <div class="col-3">
-                <%= link_to books_path do %>
-                  <i class="fa-solid fa-book-open"></i>Books
-                <% end %>
-              </div>
-              <div class="col-3">
-                <%= link_to destroy_user_session_path, method: :delete do %>
-                  <i class="fa-solid fa-right-from-bracket"></i>Log out
-                <% end %>
-              </div>
+            </li>
+            <li class="nav-item">
+              <%= link_to books_path do %>
+                <i class="fa-solid fa-book-open"></i>Books
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <i class="fa-solid fa-right-from-bracket"></i>Log out
+              <% end %>
+            </li>
             <% else %>
-              <div class="col-3">
-                <%= link_to root_path do %>
-                  <i class="fa-solid fa-house"></i>Home
-                <% end %>
-              </div>
-              <div class="col-3">
-                <%= link_to about_path do %>
-                  <i class="fa-solid fa-link"></i>About
-                <% end %>
-              </div>
-              <div class="col-3">
-                <%= link_to new_user_registration_path do %>
-                  <i class="fa-solid fa-user-plus"></i>Sign up
-                <% end %>
-              </div>
-              <div class="col-3">
-                <%= link_to new_user_session_path do %>
-                  <i class="fa-solid fa-right-to-bracket"></i>Log in
-                <% end %>
-              </div>
+            <li class="nav-item">
+              <%= link_to root_path do %>
+                <i class="fa-solid fa-house"></i>Home
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to about_path do %>
+                <i class="fa-solid fa-link"></i>About
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_registration_path do %>
+                <i class="fa-solid fa-user-plus"></i>Sign up
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_session_path do %>
+                <i class="fa-solid fa-right-to-bracket"></i>Log in
+              <% end %>
+            </li>
             <% end %>
+            </ul>
           </div>
         </div>
-      </div>
-
+      </nav>
+    </header>
       <%= yield %>
 
       <div class="footer row justify-content-center">

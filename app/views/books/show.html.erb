@@ -4,7 +4,7 @@
 
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render 'profile', book: @book %>
+    <%= render 'profile', user: @user %>
     <div class="col-md-8 offset-1">
       <h2>Book detail</h2>
       <%= image_tag @book.user.get_profile_image(100,100) %>

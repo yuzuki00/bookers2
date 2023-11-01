@@ -7,14 +7,31 @@
     <%= render 'profile', user: @book.user %>
     <div class="col-md-8 offset-1">
       <h2>Book detail</h2>
-      <%= image_tag @book.user.get_profile_image(100,100) %>
-      <%= link_to @book.user.name, user_path(@book.user_id) %>
-      <%= link_to @book.title, book_path(@book.id) %>
-      <%= @book.body %>
-      <% if @book.user == current_user %>
-        <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-success" %>
-        <%= link_to "Destroy", book_path(@book.id), method: :delete, class: "btn btn-danger", data: {confirm: "本当に消しますか？"} %>
-      <% end %>
+      <table class="table table-inverse">
+        <tr>
+            <td>
+            <%= link_to user_path(@book.user_id) do %>
+              <%= image_tag @book.user.get_profile_image(100,100) %>
+            <% end %>
+            <br>
+            <%= link_to @book.user.name, user_path(@book.user_id) %>
+            </td>
+            <td>
+              <%= link_to @book.title, book_path(@book.id) %>
+            </td>
+            <td>
+              <%= @book.body %>
+            </td>
+            <% if @book.user == current_user %>
+              <td>
+                <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-success" %>
+              </td>
+              <td>
+                <%= link_to "Destroy", book_path(@book.id), method: :delete, class: "btn btn-danger", data: {confirm: "本当に消しますか？"} %>
+              </td>
+            <% end %>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
